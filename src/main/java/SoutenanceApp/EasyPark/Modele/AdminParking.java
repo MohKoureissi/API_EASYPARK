@@ -23,7 +23,7 @@ public class AdminParking {
     @Column(nullable = false, name = "motdepasse")
     @NotNull(message = "Ce champs vide")
     private String motdepasse;
-    @Column(nullable = false, name = "photo")
+    @Column(name = "photo")
     private String photo;
     @Column(nullable = false, name = "nomParking")
     @NotNull(message = "Ce champs vide")
