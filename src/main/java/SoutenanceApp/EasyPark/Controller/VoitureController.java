@@ -56,4 +56,16 @@ public class VoitureController {
         return new ResponseEntity<>(voitureService.getAllVoiture(), HttpStatus.OK);
     }
 
+    @GetMapping("/read/{idVoiture}")
+    @Operation(summary = "Lire voiture par id")
+    public ResponseEntity<Voiture> getVoitureById(@Valid @PathVariable long idVoiture){
+        return new ResponseEntity<>(voitureService.getVoitureById(idVoiture), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete/{idVoiture}")
+    @Operation(summary = "Suppression d'une voiture")
+    public String supprimer(@Valid @PathVariable long idVoiture){
+        return voitureService.deleteVoiture(idVoiture);
+    }
+
 }
