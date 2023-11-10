@@ -98,7 +98,7 @@ public class AdminParkingService {
     public AdminParking connexionAdmin(String email, String motdepasse){
         AdminParking adminParking = repoAdminParking.findByMotdepasseAndEmail(motdepasse, email);
         if(adminParking == null)
-            throw new NoContentException("Cet admin n'existe pas!");
+            throw new NoContentException("Connexion échoué!");
          return adminParking;
     }
 

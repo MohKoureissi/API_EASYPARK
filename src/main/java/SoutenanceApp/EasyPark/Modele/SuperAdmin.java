@@ -14,9 +14,9 @@ public class SuperAdmin {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long idSuperAdmin;
-    @Column(nullable = false, name = "nomUtilisateur")
+    @Column(nullable = false, name = "email")
     @NotNull(message = "Ce champs est vide")
-    private String nomUtilisateur;
+    private String email;
     @Column(nullable = false, name = "motdepasse")
     @NotNull(message = "Ce champs est vide")
     private String motdepasse;
