@@ -1,8 +1,11 @@
 package SoutenanceApp.EasyPark.Modele;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -25,4 +28,19 @@ public class Client {
     @Column(nullable = false, name = "motdepasse")
     @NotNull(message = "Ce champs est vide")
     private String motdepasse;
+    @Column(nullable = false, name = "confirmation")
+    @NotNull(message = "Ce champs est vide")
+    private String confirmation;
+
+    @OneToMany(mappedBy = "client")
+    @JsonIgnore
+    private List<Paiement> paiementList;
+
+    @OneToMany(mappedBy = "client")
+    @JsonIgnore
+    private List<Location> locationList;
+
+    @OneToMany(mappedBy = "client")
+    @JsonIgnore
+    private List<Achat> achatList;
 }

@@ -1,9 +1,13 @@
 package SoutenanceApp.EasyPark.Modele;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -33,5 +37,12 @@ public class AdminParking {
     private String adresseParking;
     @Column(nullable = false, name = "acces")
     private Boolean acces;
+
+    @OneToMany(mappedBy = "adminParking", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Voiture> voitureList= new ArrayList<>();
+    @OneToMany(mappedBy = "maintenance", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Maintenance> maintenanceList= new ArrayList<>();
 
 }

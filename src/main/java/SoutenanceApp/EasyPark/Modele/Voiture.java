@@ -1,5 +1,6 @@
 package SoutenanceApp.EasyPark.Modele;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -29,7 +30,6 @@ public class Voiture {
     @NotNull(message = "Champs photo vide")
     private String photo3;
     @Column( name = "photo4")
-    @NotNull(message = "Champs photo vide")
     private String photo4;
     @Column(nullable = false, name = "prix")
     @NotNull(message = "Ce champs est vide")
@@ -40,9 +40,16 @@ public class Voiture {
     @Column(nullable = false, name = "type")
     @NotNull(message = "Ce champs est vide")
     private String type;
-    @Column(nullable = false, name = "disponibilite")
-    @NotNull(message = "Ce champs est vide")
+    @Column( name = "disponibilite")
     private Boolean disponibilite;
+
+    @ManyToOne()
+    @JoinColumn(name = "idAdminParking")
+    private AdminParking adminParking;
+
+    @OneToOne(mappedBy = "voiture")
+    @JsonIgnore
+    private Paiement paiement;
 
 
 }
