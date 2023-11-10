@@ -5,6 +5,9 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Data
 public class Voiture {
@@ -50,6 +53,9 @@ public class Voiture {
     @OneToOne(mappedBy = "voiture")
     @JsonIgnore
     private Paiement paiement;
+
+    @OneToMany(mappedBy = "voiture")
+    private List<Maintenance> maintenanceList= new ArrayList<>();
 
 
 }

@@ -48,4 +48,15 @@ public class AchatContoller {
     public ResponseEntity<Achat> getById(@Valid @PathVariable long idAchat){
         return new ResponseEntity<>(achatService.getAchatById(idAchat), HttpStatus.OK);
     }
+
+    @PutMapping("/update")
+    @Operation(summary = "Modification d'un Achat")
+    public ResponseEntity<Achat> modifier(@Valid @RequestBody Achat achat){
+        return new ResponseEntity<>(achatService.updateAchat(achat), HttpStatus.OK);
+    }
+    @DeleteMapping("/delete")
+    @Operation(summary = "Suppression d'un achat")
+    public String supprimer(@Valid @PathVariable long idAchat){
+        return achatService.delete(idAchat);
+    }
 }

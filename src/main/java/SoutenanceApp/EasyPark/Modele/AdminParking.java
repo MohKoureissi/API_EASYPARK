@@ -41,8 +41,12 @@ public class AdminParking {
     @OneToMany(mappedBy = "adminParking", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Voiture> voitureList= new ArrayList<>();
-    @OneToMany(mappedBy = "maintenance", cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy = "adminParking", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Maintenance> maintenanceList= new ArrayList<>();
 
+    @ManyToOne
+    @JoinColumn()
+    private SuperAdmin superAdmin;
 }
