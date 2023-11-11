@@ -5,13 +5,14 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Data
 public class Client {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idClient;
     @Column(nullable = false, name = "nom")
     @NotNull(message = "Ce champs est vide")
@@ -32,15 +33,15 @@ public class Client {
     @NotNull(message = "Ce champs est vide")
     private String confirmation;
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<Paiement> paiementList;
+    private List<Paiement> paiementList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<Location> locationList;
+    private List<Location> locationList= new ArrayList<>();
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<Achat> achatList;
+    private List<Achat> achatList = new ArrayList<>();
 }

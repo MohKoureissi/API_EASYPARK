@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Data
 public class Paiement {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idPaiement;
     @Column(nullable = false, name = "montant")
     @NotNull(message = "Champs montant vide")

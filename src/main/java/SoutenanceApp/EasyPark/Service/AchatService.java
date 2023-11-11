@@ -41,8 +41,8 @@ public class AchatService {
 
     public Achat updateAchat(Achat achat){
         Achat achat1= achatRepository.findByIdAchat(achat.getIdAchat());
-        if(achat1 == null)
-            throw new NoContentException("Ce achat n'existe pas");
+        if(achat1 != null)
+            throw new NoContentException("Cet achat n'existe pas");
         return achatRepository.save(achat1);
     }
 

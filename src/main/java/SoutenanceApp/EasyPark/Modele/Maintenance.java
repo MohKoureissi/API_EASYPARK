@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Data
 public class Maintenance {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idMaintenance;
     @Column(nullable = false, name = "date")
     @NotNull(message = "Le champs date est vide")

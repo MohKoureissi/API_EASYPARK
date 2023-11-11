@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 public class Voiture {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idVoiture;
     @Column(nullable = false, name = "marque")
     @NotNull(message = "Ce champs est vide")

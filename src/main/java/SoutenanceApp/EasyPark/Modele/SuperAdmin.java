@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 public class SuperAdmin {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idSuperAdmin;
     @Column(nullable = false, name = "email")
     @NotNull(message = "Ce champs est vide")
@@ -23,5 +23,5 @@ public class SuperAdmin {
 
     @OneToMany(mappedBy = "superAdmin")
     @JsonIgnore
-    private List<AdminParking> adminParkingList= new ArrayList<>();
+    private List<AdminParking> adminParkingList;
 }

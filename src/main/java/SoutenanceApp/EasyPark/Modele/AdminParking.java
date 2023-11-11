@@ -47,6 +47,6 @@ public class AdminParking {
     private List<Maintenance> maintenanceList= new ArrayList<>();
 
     @ManyToOne
-    @JoinColumn()
+    @JoinColumn(name = "idSuperAdmin")
     private SuperAdmin superAdmin;
 }

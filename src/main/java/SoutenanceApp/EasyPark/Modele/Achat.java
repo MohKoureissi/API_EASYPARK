@@ -10,14 +10,14 @@ import java.time.LocalDate;
 @Data
 public class Achat {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idAchat;
     @Column(nullable = false, name = "dateAchat")
     @NotNull(message = "Le champs date est vide")
     private LocalDate dateAchat;
 
     @ManyToOne
-    @JoinColumn(name = "idClient")
+    @JoinColumn()
     private Client client;
 
     @ManyToOne
