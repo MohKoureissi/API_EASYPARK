@@ -46,7 +46,7 @@ public class AdminParking {
     @JsonIgnore
     private List<Maintenance> maintenanceList= new ArrayList<>();
 
-    @ManyToOne
-    @JoinColumn(name = "idSuperAdmin")
-    private SuperAdmin superAdmin;
+   // @ManyToOne
+   // @JoinColumn(name = "idSuperAdmin")
+   // private SuperAdmin superAdmin;
 }

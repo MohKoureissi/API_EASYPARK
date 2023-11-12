@@ -21,7 +21,7 @@ public class SuperAdmin {
     @NotNull(message = "Ce champs est vide")
     private String motdepasse;
 
-    @OneToMany(mappedBy = "superAdmin")
-    @JsonIgnore
-    private List<AdminParking> adminParkingList;
+    //@OneToMany(mappedBy = "superAdmin")
+   // @JsonIgnore
+   // private List<AdminParking> adminParkingList;
 }
