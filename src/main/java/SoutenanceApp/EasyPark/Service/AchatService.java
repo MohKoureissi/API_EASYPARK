@@ -4,6 +4,7 @@ import SoutenanceApp.EasyPark.Exception.NoContentException;
 import SoutenanceApp.EasyPark.Modele.Achat;
 import SoutenanceApp.EasyPark.Repositories.AchatRepository;
 import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +22,8 @@ public class AchatService {
     public Achat create(Achat achat){
         Achat achat1  = achatRepository.findByIdAchat(achat.getIdAchat());
             if(achat1 != null)
-                throw new EntityExistsException("Cet achat existe déja");
-            return achatRepository.save(achat1);
+                throw new EntityNotFoundException("Cet achat existe déja");
+            return achatRepository.save(achat);
     }
 
     public List<Achat> getAllAchat(){
@@ -41,9 +42,9 @@ public class AchatService {
 
     public Achat updateAchat(Achat achat){
         Achat achat1= achatRepository.findByIdAchat(achat.getIdAchat());
-        if(achat1 != null)
+        if(achat1 == null)
             throw new NoContentException("Cet achat n'existe pas");
-        return achatRepository.save(achat1);
+        return achatRepository.save(achat);
     }
 
     public String delete(long idAchat){

@@ -4,6 +4,7 @@ import SoutenanceApp.EasyPark.Exception.NoContentException;
 import SoutenanceApp.EasyPark.Modele.Voiture;
 import SoutenanceApp.EasyPark.Repositories.VoitureRepository;
 import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -141,7 +142,7 @@ public class VoitureService {
 
             return voitureRepository.save(voiture);
         } else {
-            throw new EntityExistsException("Cette voiture existe deja");
+            throw new EntityNotFoundException("Cette voiture existe deja");
         }
     }  // Fin methode Ajouter
     //Lister tout les voitures
@@ -165,7 +166,7 @@ public class VoitureService {
         Voiture voiture1= voitureRepository.findByIdVoiture(voiture.getIdVoiture());
         if(voiture1 == null)
             throw new NoContentException("voiture non trouvé");
-        return voitureRepository.save(voiture1);
+        return voitureRepository.save(voiture);
     }
 
     //Suppression

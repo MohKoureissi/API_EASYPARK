@@ -4,6 +4,7 @@ import SoutenanceApp.EasyPark.Exception.NoContentException;
 import SoutenanceApp.EasyPark.Modele.Client;
 import SoutenanceApp.EasyPark.Repositories.ClientRepository;
 import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
 import org.aspectj.apache.bcel.generic.InstructionConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,8 +23,8 @@ public class ClientService {
     public Client create(Client client){
         Client client1= clientRepository.findByEmail(client.getEmail());
         if(client1 !=null)
-            throw new EntityExistsException("Ce client existe déja");
-        return clientRepository.save(client1);
+            throw new EntityNotFoundException("Ce client existe déja");
+        return clientRepository.save(client);
     }
 
     public List<Client> getAllClient(){
@@ -51,13 +52,13 @@ public class ClientService {
         Client client1= clientRepository.findByIdClient(client.getIdClient());
         if(client1 == null)
             throw new NoContentException("Client non trouvé");
-        return clientRepository.save(client1);
+        return clientRepository.save(client);
     }
 
     public Client connexion(String email, String motdepasse){
         Client client1= clientRepository.findByEmailAndMotdepasse(email, motdepasse);
         if(client1 == null)
-            throw new EntityExistsException("Ce client n'existe pas");
+            throw new EntityNotFoundException("Ce client n'existe pas");
         return client1;
     }
 }

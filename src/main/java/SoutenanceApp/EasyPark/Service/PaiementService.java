@@ -4,6 +4,7 @@ import SoutenanceApp.EasyPark.Exception.NoContentException;
 import SoutenanceApp.EasyPark.Modele.Paiement;
 import SoutenanceApp.EasyPark.Repositories.PaiementRepository;
 import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +22,8 @@ public class PaiementService {
     public Paiement create(Paiement paiement){
         Paiement paiement1= paiementRepository.findByIdPaiement(paiement.getIdPaiement());
         if(paiement1 != null)
-            throw new EntityExistsException("Ce paiement existe deja");
-        return paiementRepository.save(paiement1);
+            throw new EntityNotFoundException("Ce paiement existe deja");
+        return paiementRepository.save(paiement);
     }
 
     public List<Paiement> getAllPaiement(){
@@ -42,14 +43,14 @@ public class PaiementService {
     public Paiement updatePaiement(Paiement paiement){
         Paiement paiement1= paiementRepository.findByIdPaiement(paiement.getIdPaiement());
         if(paiement1 == null)
-            throw new EntityExistsException("Paiement non trouvé");
-        return paiementRepository.save(paiement1);
+            throw new EntityNotFoundException("Paiement non trouvé");
+        return paiementRepository.save(paiement);
     }
 
     public String deletePaiement(long idPaiement){
         Paiement paiement= paiementRepository.findByIdPaiement(idPaiement);
         if(paiement == null)
-            throw new EntityExistsException("Ce paiement n'existe pas");
+            throw new EntityNotFoundException("Ce paiement n'existe pas");
         return "Paiement supprimé";
     }
 }

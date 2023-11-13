@@ -2,6 +2,7 @@ package SoutenanceApp.EasyPark.Controller;
 
 import SoutenanceApp.EasyPark.Modele.Paiement;
 import SoutenanceApp.EasyPark.Modele.SuperAdmin;
+import SoutenanceApp.EasyPark.Repositories.SuperAdminRepository;
 import SoutenanceApp.EasyPark.Service.SuperAdminService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -22,7 +23,10 @@ import java.util.List;
 @RequestMapping("/superAdmin")
 public class SuperAdminController {
     @Autowired
-    private final SuperAdminService superAdminService;
+     SuperAdminService superAdminService;
+
+    @Autowired
+    SuperAdminRepository superAdminRepository;
 
     @PostMapping("/create")
     @Operation(summary = "Creation du Super Admin")

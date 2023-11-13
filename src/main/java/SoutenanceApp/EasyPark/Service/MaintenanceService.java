@@ -4,6 +4,7 @@ import SoutenanceApp.EasyPark.Exception.NoContentException;
 import SoutenanceApp.EasyPark.Modele.Maintenance;
 import SoutenanceApp.EasyPark.Repositories.MaintenanceRepositoy;
 import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +22,8 @@ public class MaintenanceService {
     public Maintenance create(Maintenance maintenance){
         Maintenance maintenance1= maintenanceRepositoy.findByIdMaintenance(maintenance.getIdMaintenance());
         if(maintenance1 != null)
-            throw new EntityExistsException("Cette maintenance existe déja");
-        return maintenanceRepositoy.save(maintenance1);
+            throw new EntityNotFoundException("Cette maintenance existe déja");
+        return maintenanceRepositoy.save(maintenance);
     }
 
     public List<Maintenance> getAll(){
@@ -41,9 +42,9 @@ public class MaintenanceService {
 
     public Maintenance updateMaintenance(Maintenance maintenance){
         Maintenance maintenance1= maintenanceRepositoy.findByIdMaintenance(maintenance.getIdMaintenance());
-        if(maintenance1 != null)
-            throw new EntityExistsException("Cette maintenance existe déja");
-        return maintenanceRepositoy.save(maintenance1);
+        if(maintenance1 == null)
+            throw new EntityNotFoundException("Cette maintenance n'existe pas");
+        return maintenanceRepositoy.save(maintenance);
     }
 
     public String deleteMaintenance(long idMaintenance){

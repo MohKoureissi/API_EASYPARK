@@ -4,6 +4,7 @@ import SoutenanceApp.EasyPark.Exception.NoContentException;
 import SoutenanceApp.EasyPark.Modele.Location;
 import SoutenanceApp.EasyPark.Repositories.LocationRepository;
 import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +22,8 @@ public class LocationService {
     public Location create(Location location){
         Location location1= locationRepository.findByIdLocation(location.getIdLocation());
         if(location1 != null)
-            throw new EntityExistsException("Cette location existe déja");
-        return locationRepository.save(location1);
+            throw new EntityNotFoundException("Cette location existe déja");
+        return locationRepository.save(location);
     }
 
     public List<Location> getAllLocation(){
@@ -43,7 +44,7 @@ public class LocationService {
         Location location1= locationRepository.findByIdLocation(location.getIdLocation());
         if(location1 == null)
             throw new NoContentException("Cette location n'existe pas");
-        return location1;
+        return locationRepository.save(location);
     }
 
     public String deleteLocation(long idLocation){
