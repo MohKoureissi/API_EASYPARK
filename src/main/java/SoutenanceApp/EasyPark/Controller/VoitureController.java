@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,19 +28,19 @@ public class VoitureController {
     @Autowired
     private final VoitureService voitureService;
 
+
     @PostMapping("/create")
     @Operation(summary = "Ajouter nouvelle Voiture")
     public ResponseEntity<Voiture> create(
             @Valid @RequestParam("voiture") String voitureString,
-            @RequestParam(value = "photo", required = false) MultipartFile photo1, MultipartFile photo2, MultipartFile photo3, MultipartFile photo4 ) throws Exception{
-        Voiture voiture= new Voiture();
-        try{
-            voiture= new JsonMapper().readValue(voitureString, Voiture.class);
-        } catch(JsonProcessingException e){
-            throw new Exception(e.getMessage());
-        }
-        Voiture saveVoiture= voitureService.addVoiture(voiture, photo1, photo2,photo3, photo4);
-        return new ResponseEntity<>(saveVoiture, HttpStatus.CREATED);
+            @RequestParam(value = "photo2", required = false) MultipartFile photo2,
+            @RequestParam(value = "photo3", required = false) MultipartFile photo3,
+            @RequestParam(value = "photo4", required = false) MultipartFile photo4) throws Exception {
+        Voiture voiture = new JsonMapper().readValue(voitureString, Voiture.class);
+
+        Voiture savedVoiture = voitureService.saveVoitureWithPhotos(voiture, photo2, photo3, photo4);
+
+        return new ResponseEntity<>(savedVoiture, HttpStatus.CREATED);
     }
 
     @GetMapping("read")
@@ -63,9 +64,29 @@ public class VoitureController {
     }
 
     @DeleteMapping("/delete/{idVoiture}")
-    @Operation(summary = "Suppression d'une voiture")
-    public String supprimer(@Valid @PathVariable long idVoiture){
-        return voitureService.deleteVoiture(idVoiture);
+    @Operation(summary = "Supprimer une Voiture par ID")
+    public ResponseEntity<String> delete(@PathVariable Long idVoiture) throws EntityNotFoundException {
+        voitureService.deleteVoiture(idVoiture);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+//    @DeleteMapping("/delete/{idVoiture}")
+//    @Operation(summary = "Suppression d'une voiture")
+//    public String supprimer(@Valid @PathVariable long idVoiture){
+//        return voitureService.deleteVoiture(idVoiture);
+//    }
+@PutMapping("/update/{id}")
+@Operation(summary = "Modifier une Voiture par ID")
+public ResponseEntity<Voiture> update(
+        @PathVariable Long idVoiture,
+        @Valid @RequestParam("voiture") String voitureString,
+        @RequestParam(value = "photo2", required = false) MultipartFile photo2,
+        @RequestParam(value = "photo3", required = false) MultipartFile photo3,
+        @RequestParam(value = "photo4", required = false) MultipartFile photo4) throws Exception {
 
+    Voiture updatedVoiture = new JsonMapper().readValue(voitureString, Voiture.class);
+
+    Voiture savedVoiture = voitureService.updateVoiture(idVoiture, updatedVoiture, photo2, photo3, photo4);
+
+    return new ResponseEntity<>(savedVoiture, HttpStatus.OK);
+}
 }

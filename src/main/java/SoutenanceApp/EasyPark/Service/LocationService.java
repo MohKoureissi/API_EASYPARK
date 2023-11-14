@@ -51,6 +51,7 @@ public class LocationService {
         Location location= locationRepository.findByIdLocation(idLocation);
         if(location == null)
             throw new NoContentException("Cette location n'existe pas");
+        locationRepository.delete(location);
             return "Location supprimer";
     }
 }

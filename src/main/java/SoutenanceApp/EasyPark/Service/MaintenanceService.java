@@ -51,6 +51,7 @@ public class MaintenanceService {
         Maintenance maintenance = maintenanceRepositoy.findByIdMaintenance(idMaintenance);
         if(maintenance == null)
             throw new NoContentException("Cette maintenance n'existe pas");
+        maintenanceRepositoy.delete(maintenance);
         return "Maintenance Supprimer";
     }
 }

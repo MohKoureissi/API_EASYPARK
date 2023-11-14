@@ -51,6 +51,7 @@ public class PaiementService {
         Paiement paiement= paiementRepository.findByIdPaiement(idPaiement);
         if(paiement == null)
             throw new EntityNotFoundException("Ce paiement n'existe pas");
+        paiementRepository.delete(paiement);
         return "Paiement supprimé";
     }
 }

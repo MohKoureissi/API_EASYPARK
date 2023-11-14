@@ -23,16 +23,14 @@ public class Voiture {
     @Column(nullable = false, name = "anneeSortie")
     @NotNull(message = "Ce champs est vide")
     private String anneeSortie;
-    @Column(nullable = false, name = "photo1")
-    @NotNull(message = "Champs photo vide")
-    private String photo1;
     @Column(nullable = false, name = "photo2")
     @NotNull(message = "Champs photo vide")
     private String photo2;
     @Column(nullable = false, name = "photo3")
     @NotNull(message = "Champs photo vide")
     private String photo3;
-    @Column( name = "photo4")
+    @NotNull(message = "Champs photo vide")
+    @Column(nullable = false, name = "photo4")
     private String photo4;
     @Column(nullable = false, name = "prix")
     @NotNull(message = "Ce champs est vide")

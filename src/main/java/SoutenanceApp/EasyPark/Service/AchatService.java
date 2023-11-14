@@ -51,6 +51,7 @@ public class AchatService {
         Achat achat = achatRepository.findByIdAchat(idAchat);
         if(achat == null)
             throw new NoContentException("Cet achat n'existe pas");
+        achatRepository.delete(achat);
         return "Achat supprimer";
     }
 }

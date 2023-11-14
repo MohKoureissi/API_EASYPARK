@@ -20,10 +20,11 @@ public class ClientService {
         this.clientRepository= clientRepository1;
     }
 
-    public Client create(Client client){
-        Client client1= clientRepository.findByEmail(client.getEmail());
-        if(client1 !=null)
+    public Client create(Client client) {
+        Client client1 = clientRepository.findByEmail(client.getEmail());
+        if (client1 != null) {
             throw new EntityNotFoundException("Ce client existe déja");
+        }
         return clientRepository.save(client);
     }
 
@@ -45,6 +46,7 @@ public class ClientService {
         Client client= clientRepository.findByIdClient(idClient);
         if(client == null)
             throw new NoContentException("Ce client n'existe pas");
+        clientRepository.delete(client);
         return "Client supprimer";
     }
 
