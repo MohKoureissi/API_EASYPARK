@@ -21,6 +21,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("client")
+@CrossOrigin
 public class ClientController {
     @Autowired
     private final ClientService clientService;

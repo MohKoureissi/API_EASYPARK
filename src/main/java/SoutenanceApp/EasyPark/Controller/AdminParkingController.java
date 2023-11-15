@@ -1,6 +1,7 @@
 package SoutenanceApp.EasyPark.Controller;
 
 import SoutenanceApp.EasyPark.Modele.AdminParking;
+import SoutenanceApp.EasyPark.Modele.Voiture;
 import SoutenanceApp.EasyPark.Service.AdminParkingService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.json.JsonMapper;
@@ -20,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.swing.text.html.parser.Entity;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("adminParking")
 @AllArgsConstructor
@@ -30,16 +32,13 @@ public class AdminParkingController {
     @PostMapping("/create")
     @Operation(summary = "Création d'un AdminParking")
     public ResponseEntity<AdminParking> createAdminParking(
-            @Valid @RequestParam("adminParking") String adminParkingString,
-            @RequestParam(value = "photo", required = false)MultipartFile multipartFile) throws Exception{
-        AdminParking adminParking= new AdminParking();
-        try{
-            adminParking= new JsonMapper().readValue(adminParkingString, AdminParking.class);
-        } catch(JsonProcessingException e){
-            throw new Exception(e.getMessage());
-        }
-        AdminParking saveAdmin= adminParkingService.createAdminParking(adminParking, multipartFile);
-        return new ResponseEntity<>(saveAdmin, HttpStatus.CREATED);
+            @Valid @RequestParam("adminParking") String adminParkString,
+            @RequestParam(value = "agrement", required = false) MultipartFile agrement) throws Exception {
+        AdminParking adminParking = new JsonMapper().readValue(adminParkString, AdminParking.class);
+
+        AdminParking savedAdminParking = adminParkingService.saveAdminWithPhotos(adminParking, agrement);
+
+        return new ResponseEntity<>(savedAdminParking, HttpStatus.CREATED);
     }
 
     @GetMapping("read")
@@ -62,11 +61,21 @@ public class AdminParkingController {
         return new ResponseEntity<>(adminParkingService.getAdminById(id), HttpStatus.OK);
     }
 
-    @PutMapping("/changeAccess/{idAdminParking}")
-    public ResponseEntity<String> tochangeAccess(@PathVariable long idAdminParking) {
-        adminParkingService.changeAccess(idAdminParking);
-        return ResponseEntity.ok("Succès : Accès de l'adminParking modifié");
-    }
+//     @PutMapping("/changeAccess/{idAdminParking}")
+//     @Operation(summary = "Modification de l'admin Parking")
+//     public ResponseEntity<AdminParking> update(
+//     @PathVariable Long idAdminParking,
+//     @Valid @RequestParam("adminParking") String adminParkString,
+//     @RequestParam(value = "agrement", required = false) MultipartFile agrement) throws Exception {
+
+// AdminParking updatedadmin= new JsonMapper().readValue(adminParkString, AdminParking.class);
+
+// AdminParking savedAdmin = adminParkingService.(idVoiture, updatedVoiture, photo2, photo3, photo4);
+
+// return new ResponseEntity<>(savedAdmin, HttpStatus.OK);
+// }
+
+
 /*
     @Operation(summary = "Modifier un AdminParking")
     @ApiResponses(value = {
