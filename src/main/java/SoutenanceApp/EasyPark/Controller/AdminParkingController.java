@@ -1,9 +1,7 @@
 package SoutenanceApp.EasyPark.Controller;
 
 import SoutenanceApp.EasyPark.Modele.AdminParking;
-import SoutenanceApp.EasyPark.Modele.Voiture;
 import SoutenanceApp.EasyPark.Service.AdminParkingService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -18,13 +16,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.swing.text.html.parser.Entity;
 import java.util.List;
 
-@CrossOrigin
 @RestController
-@RequestMapping("adminParking")
+@RequestMapping("/adminParking")
 @AllArgsConstructor
+@CrossOrigin
 public class AdminParkingController {
     @Autowired
     private final AdminParkingService adminParkingService;          //Injection de dependance
@@ -97,11 +94,11 @@ public class AdminParkingController {
         return adminParkingService.deleteAdminById(idAdminParking);
     }
 
-    @PostMapping("/login")
+    @GetMapping("/login")
     @Operation(summary = "Connexion d'un Admin Parking")
-    public Object connexion(@RequestParam("email") String email,
-                            @RequestParam("motDePasse") String motDePasse) {
-        return adminParkingService.connexionAdmin(email, motDePasse);
+    public AdminParking connexion(@RequestParam("email")  String email,
+                            @RequestParam("motdepasse")  String motdepasse) {
+        return adminParkingService.connexionAdmin(email, motdepasse);
     }
 
 }

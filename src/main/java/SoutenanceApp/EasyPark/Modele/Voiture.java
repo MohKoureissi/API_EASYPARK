@@ -41,8 +41,6 @@ public class Voiture {
     @Column(nullable = false, name = "type")
     @NotNull(message = "Ce champs est vide")
     private String type;
-    @Column( name = "disponibilite")
-    private Boolean disponibilite;
 
     @ManyToOne()
     @JoinColumn(name = "idAdminParking")
@@ -53,6 +51,7 @@ public class Voiture {
     private Paiement paiement;
 
     @OneToMany(mappedBy = "voiture")
+    @JsonIgnore
     private List<Maintenance> maintenanceList= new ArrayList<>();
 
 
