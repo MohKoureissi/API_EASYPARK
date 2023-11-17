@@ -21,7 +21,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/adminParking")
 @AllArgsConstructor
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class AdminParkingController {
     @Autowired
     private final AdminParkingService adminParkingService;          //Injection de dependance
@@ -58,35 +58,12 @@ public class AdminParkingController {
         return new ResponseEntity<>(adminParkingService.getAdminById(id), HttpStatus.OK);
     }
 
-//     @PutMapping("/changeAccess/{idAdminParking}")
-//     @Operation(summary = "Modification de l'admin Parking")
-//     public ResponseEntity<AdminParking> update(
-//     @PathVariable Long idAdminParking,
-//     @Valid @RequestParam("adminParking") String adminParkString,
-//     @RequestParam(value = "agrement", required = false) MultipartFile agrement) throws Exception {
+    @PutMapping("/changeAccess/{idAdminParking}")
+    public ResponseEntity<String> tochangeAccess(@PathVariable long idAdminParking){
+        adminParkingService.changeAccess(idAdminParking);
+        return ResponseEntity.ok("Access de l'AdminParking modifié avec succes");
+    }
 
-// AdminParking updatedadmin= new JsonMapper().readValue(adminParkString, AdminParking.class);
-
-// AdminParking savedAdmin = adminParkingService.(idVoiture, updatedVoiture, photo2, photo3, photo4);
-
-// return new ResponseEntity<>(savedAdmin, HttpStatus.OK);
-// }
-
-
-/*
-    @Operation(summary = "Modifier un AdminParking")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200",description = "Enseignant modifier",content = {
-                    @Content(mediaType = "application/json",schema = @Schema(implementation = AdminParking.class))
-            }),
-            @ApiResponse(responseCode = "400",description = "Mauvaise requete", content = @Content),
-            @ApiResponse(responseCode = "404",description = "Enseignant n'existe pas", content = @Content),
-            @ApiResponse(responseCode = "500",description = "Erreur server", content = @Content)
-    })
-    @PutMapping("/modifier")
-    public  Object modifierEnseignant(@Valid @RequestBody AdminParking adminParking) {
-        return adminParkingService.update(enseignant);
-    }   */
 
     @Operation(summary = "Suppression d'un Admin Parkin")
     @DeleteMapping("/delete/{idAdminParking}")

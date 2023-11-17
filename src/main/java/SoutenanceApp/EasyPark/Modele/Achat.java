@@ -15,6 +15,9 @@ public class Achat {
     @Column(nullable = false, name = "dateAchat")
     @NotNull(message = "Le champs date est vide")
     private LocalDate dateAchat;
+    @Column(nullable = false, name = "prix")
+    @NotNull(message = "Le champs prix est vide")
+    private long prix;
 
     @ManyToOne
     @JoinColumn()

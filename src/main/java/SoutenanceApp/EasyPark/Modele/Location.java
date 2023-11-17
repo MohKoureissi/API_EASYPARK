@@ -18,6 +18,9 @@ public class Location {
     @Column(nullable = false, name = "duree")
     @NotNull(message = "Le champs duree est vide")
     private String duree;
+    @Column(nullable = false, name = "prix")
+    @NotNull(message = "Le champs prix est vide")
+    private long prix;
 
     @ManyToOne
     @JoinColumn(name = "idVoiture")

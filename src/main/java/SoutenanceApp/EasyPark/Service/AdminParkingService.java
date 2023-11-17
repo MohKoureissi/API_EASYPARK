@@ -39,6 +39,7 @@ public class AdminParkingService {
             try {
 
                 savePhoto(agrement, adminParking::setAgrementParking);
+                 adminParking.setAcces(false);
                 return repoAdminParking.save(adminParking);
             } catch (Exception e) {
                 throw new EntityNotFoundException("Erreur lors de l'enregistrement de l'admin", e);
@@ -57,13 +58,14 @@ public class AdminParkingService {
 
                 if (!Files.exists(filePath)) {
                     Files.copy(agrement.getInputStream(), filePath);
-                    setAgrementMethod.accept("http://localhost:8080/easy_park/" + agrement.getOriginalFilename());
+                    setAgrementMethod.accept("http://localhost/easy_park/" + agrement.getOriginalFilename());
                 } else {
                     Files.delete(filePath);
                     Files.copy(agrement.getInputStream(), filePath);
-                    setAgrementMethod.accept("http://localhost:8080/easy_park/" + agrement.getOriginalFilename());
+                    setAgrementMethod.accept("http://localhost/easy_park/" + agrement.getOriginalFilename());
                 }
             }
+           
         }
 
 
@@ -97,27 +99,6 @@ public class AdminParkingService {
             return "Admin supprimé";
     }
 
-    // public AdminParking updateAdminParking(Long idAdminParking, AdminParking updateAdminParking, MultipartFile agrement) throws EntityNotFoundException {
-    //     // Recherche de la voiture par ID
-    //     AdminParking existingVoiture = repoAdminParking.findByIdAdminParking(idAdminParking)
-    //             .orElseThrow(() -> new EntityNotFoundException("Voiture non trouvée avec l'ID : " + id));
-
-    //     // Mise à jour des informations de base de la voiture
-    //     existingAdminParking.setNom(updatedNom.getMarque());
-    //     existingAdminParking.setModele(updatedVoiture.getModele());
-    //     // ... Mise à jour d'autres propriétés
-
-    //     // Mise à jour des photos (suppression des anciennes et ajout des nouvelles)
-    //     deletePhoto(existingVoiture.getPhoto2());
-    //     deletePhoto(existingVoiture.getPhoto3());
-    //     deletePhoto(existingVoiture.getPhoto4());
-
-    //     existingVoiture.setPhoto2(savePhoto(photo2));
-    //     existingVoiture.setPhoto3(savePhoto(photo3));
-    //     existingVoiture.setPhoto4(savePhoto(photo4));
-    //     // Enregistrement de la voiture mise à jour dans la base de données
-    //     return voitureRepository.save(existingVoiture);
-    // }
 
     public AdminParking connexionAdmin(String email, String motdepasse){
         AdminParking adminParking = repoAdminParking.findByMotdepasseAndEmail(motdepasse, email);

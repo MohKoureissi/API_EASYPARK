@@ -54,11 +54,11 @@ public class VoitureService {
 
                 if (!Files.exists(filePath)) {
                     Files.copy(photo.getInputStream(), filePath);
-                    setPhotoMethod.accept("http://localhost:8080/easy_park/" + photo.getOriginalFilename());
+                    setPhotoMethod.accept("http://localhost/easy_park/" + photo.getOriginalFilename());
                 } else {
                     Files.delete(filePath);
                     Files.copy(photo.getInputStream(), filePath);
-                    setPhotoMethod.accept("http://localhost:8080/easy_park/" + photo.getOriginalFilename());
+                    setPhotoMethod.accept("http://localhost/easy_park/" + photo.getOriginalFilename());
                 }
             }
         }
