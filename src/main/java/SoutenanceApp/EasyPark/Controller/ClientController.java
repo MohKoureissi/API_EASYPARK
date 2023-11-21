@@ -21,7 +21,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("client")
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class ClientController {
     @Autowired
     private final ClientService clientService;
@@ -64,10 +64,10 @@ public class ClientController {
         return clientService.updateClient(client);
     }
 
-    @PostMapping("/login")
+    @GetMapping("/login")
     @Operation(summary = "Connexion d'un client")
-    public  Object connexion(@RequestParam("email") String email,
-                             @RequestParam("motDePasse") String motDePasse) {
-        return clientService.connexion(email, motDePasse);
+    public  Client connexion(@RequestParam("email") String email,
+                             @RequestParam("motdepasse") String motdepasse) {
+        return clientService.connexion(email, motdepasse);
     }
 }

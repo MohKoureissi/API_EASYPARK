@@ -58,9 +58,9 @@ public class ClientService {
     }
 
     public Client connexion(String email, String motdepasse){
-        Client client1= clientRepository.findByEmailAndMotdepasse(email, motdepasse);
-        if(client1 == null)
-            throw new EntityNotFoundException("Ce client n'existe pas");
-        return client1;
+        Client client= clientRepository.findByEmailAndMotdepasse(email, motdepasse);
+        if(client == null)
+            throw new NoContentException("Connexion échoué!");
+        return client;
     }
 }
