@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin
+@CrossOrigin(origins ="*" )
 @RestController
 @AllArgsConstructor
 @RequestMapping("/achat")
@@ -55,7 +55,7 @@ public class AchatContoller {
     public ResponseEntity<Achat> modifier(@Valid @RequestBody Achat achat){
         return new ResponseEntity<>(achatService.updateAchat(achat), HttpStatus.OK);
     }
-    @DeleteMapping("/delete")
+    @DeleteMapping("/delete/{idAchat}")
     @Operation(summary = "Suppression d'un achat")
     public String supprimer(@Valid @PathVariable long idAchat){
         return achatService.delete(idAchat);

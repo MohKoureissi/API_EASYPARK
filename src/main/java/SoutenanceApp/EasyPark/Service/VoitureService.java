@@ -24,10 +24,7 @@ public class VoitureService {
     public VoitureService (VoitureRepository voitureRepository1){
         this.voitureRepository= voitureRepository1;
     }
-
-
-        // ...
-
+    //Ajouter voiture avec ses 3 photos
         public Voiture saveVoitureWithPhotos(Voiture voiture,MultipartFile photo2, MultipartFile photo3, MultipartFile photo4) {
             try {
 

@@ -57,7 +57,7 @@ public class MaintenanceController {
         return new ResponseEntity<>(maintenanceService.updateMaintenance(maintenance), HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/delete/{idMaintenance}")
     @Operation(summary = "Suppression d'une maintenance")
     public String supprimer(@Valid @PathVariable long idMaintenance){
         return maintenanceService.deleteMaintenance(idMaintenance);

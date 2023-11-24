@@ -39,7 +39,7 @@ public class AdminParking {
     @Column(nullable = false, name = "acces")
     private Boolean acces;
 
-    @OneToMany(mappedBy = "adminParking", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "adminParking")
     @JsonIgnore
     private List<Voiture> voitureList= new ArrayList<>();
 

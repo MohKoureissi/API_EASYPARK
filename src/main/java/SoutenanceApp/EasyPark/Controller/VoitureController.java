@@ -68,7 +68,7 @@ public class VoitureController {
     @Operation(summary = "Supprimer une Voiture par ID")
     public ResponseEntity<String> delete(@PathVariable Long idVoiture) throws EntityNotFoundException {
         voitureService.deleteVoiture(idVoiture);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 //    @DeleteMapping("/delete/{idVoiture}")
 //    @Operation(summary = "Suppression d'une voiture")

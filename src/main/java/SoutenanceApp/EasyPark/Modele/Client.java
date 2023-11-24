@@ -33,15 +33,15 @@ public class Client {
     @NotNull(message = "Ce champs est vide")
     private String confirmation;
 
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "client")
     @JsonIgnore
     private List<Paiement> paiementList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "client")
     @JsonIgnore
     private List<Location> locationList= new ArrayList<>();
 
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "client")
     @JsonIgnore
     private List<Achat> achatList = new ArrayList<>();
 }
