@@ -1,10 +1,12 @@
 package SoutenanceApp.EasyPark.Service;
 
 import SoutenanceApp.EasyPark.Exception.NoContentException;
+import SoutenanceApp.EasyPark.Modele.Achat;
 import SoutenanceApp.EasyPark.Modele.Voiture;
 import SoutenanceApp.EasyPark.Repositories.VoitureRepository;
-import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -167,5 +169,8 @@ public class VoitureService {
 
         return null;
     }
+
+
+   
 
 }

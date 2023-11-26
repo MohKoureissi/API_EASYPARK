@@ -41,6 +41,9 @@ public class Voiture {
     @Column(nullable = false, name = "type")
     @NotNull(message = "Ce champs est vide")
     private String type;
+    @Column(nullable = false, name = "puissance")
+    @NotNull(message = "Le champs puissance est vide")
+    private String puissance;
 
     @ManyToOne()
     @JoinColumn(name = "idAdminParking")
