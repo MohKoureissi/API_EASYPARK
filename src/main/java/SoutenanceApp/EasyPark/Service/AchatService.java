@@ -2,9 +2,12 @@ package SoutenanceApp.EasyPark.Service;
 
 import SoutenanceApp.EasyPark.Exception.NoContentException;
 import SoutenanceApp.EasyPark.Modele.Achat;
+import SoutenanceApp.EasyPark.Modele.Voiture;
 import SoutenanceApp.EasyPark.Repositories.AchatRepository;
-import jakarta.persistence.EntityExistsException;
+import SoutenanceApp.EasyPark.Repositories.VoitureRepository;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +18,22 @@ public class AchatService {
     @Autowired
     private final AchatRepository achatRepository;
 
+    @Autowired
+    private  VoitureRepository voitureRepository;
+
+    public void VoitureService (VoitureRepository voitureRepository1){
+        this.voitureRepository= voitureRepository1;
+    }
+
+    /**
+     * @param achatRepository1
+     */
     public AchatService(AchatRepository achatRepository1){
+      //  this.achatRepository1 = achatRepository1;
         this.achatRepository= achatRepository1;
     }
+
+    
 
     public Achat create(Achat achat){
         Achat achat1  = achatRepository.findByIdAchat(achat.getIdAchat());
@@ -53,5 +69,14 @@ public class AchatService {
             throw new NoContentException("Cet achat n'existe pas");
         achatRepository.delete(achat);
         return "Achat supprimer";
+    }
+
+      @Transactional
+    public void decrementeQuantiteVoiture(Achat achat) {
+        Voiture voiture = achat.getVoiture();
+        if (voiture != null && voiture.getQuantite() > 0) {
+            voiture.setQuantite(voiture.getQuantite() - 1);
+            voitureRepository.save(voiture);
+        }
     }
 }

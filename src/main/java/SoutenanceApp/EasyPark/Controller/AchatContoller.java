@@ -28,6 +28,7 @@ public class AchatContoller {
     @PostMapping("/create")
     @Operation(summary = "Enregistrer nouvelle Achat")
     public ResponseEntity<Achat> create(@Valid @RequestBody Achat achat){
+       achatService.decrementeQuantiteVoiture(achat);
         return new ResponseEntity<>(achatService.create(achat), HttpStatus.OK);
     }
 
