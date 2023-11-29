@@ -35,18 +35,18 @@ public class AdminParkingService {
         return "succes";
     }
     //
-     public AdminParking saveAdminWithPhotos(AdminParking adminParking,MultipartFile agrement) {
+     public AdminParking saveAdminWithPhotos(AdminParking adminParking,MultipartFile agrementParking) {
             try {
+                savePhoto(agrementParking, adminParking::setAgrementParking);
 
-                savePhoto(agrement, adminParking::setAgrementParking);
                  adminParking.setAcces(false);
                 return repoAdminParking.save(adminParking);
             } catch (Exception e) {
                 throw new EntityNotFoundException("Erreur lors de l'enregistrement de l'admin", e);
             }
         }
-          private void savePhoto(MultipartFile agrement, Consumer<String> setAgrementMethod) throws IOException {
-            if (agrement != null) {
+          private void savePhoto(MultipartFile agrementParking, Consumer<String> setAgrementMethod) throws IOException {
+            if (agrementParking != null) {
                 String location = "C:\\xampp\\htdocs\\easy_park";
                 Path rootLocation = Paths.get(location);
 
@@ -54,15 +54,15 @@ public class AdminParkingService {
                     Files.createDirectories(rootLocation);
                 }
 
-                Path filePath = rootLocation.resolve(agrement.getOriginalFilename());
+                Path filePath = rootLocation.resolve(agrementParking.getOriginalFilename());
 
                 if (!Files.exists(filePath)) {
-                    Files.copy(agrement.getInputStream(), filePath);
-                    setAgrementMethod.accept("http://localhost/easy_park/" + agrement.getOriginalFilename());
+                    Files.copy(agrementParking.getInputStream(), filePath);
+                    setAgrementMethod.accept("http://localhost/easy_park/" + agrementParking.getOriginalFilename());
                 } else {
                     Files.delete(filePath);
-                    Files.copy(agrement.getInputStream(), filePath);
-                    setAgrementMethod.accept("http://localhost/easy_park/" + agrement.getOriginalFilename());
+                    Files.copy(agrementParking.getInputStream(), filePath);
+                    setAgrementMethod.accept("http://localhost/easy_park/" + agrementParking.getOriginalFilename());
                 }
             }
            
