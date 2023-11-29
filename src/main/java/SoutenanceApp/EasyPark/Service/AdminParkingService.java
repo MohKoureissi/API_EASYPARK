@@ -4,6 +4,8 @@ import SoutenanceApp.EasyPark.Exception.NoContentException;
 import SoutenanceApp.EasyPark.Modele.AdminParking;
 import SoutenanceApp.EasyPark.Modele.Voiture;
 import SoutenanceApp.EasyPark.Repositories.RepoAdminParking;
+import SoutenanceApp.EasyPark.emailConfig.EmailDetails;
+import SoutenanceApp.EasyPark.emailConfig.EmailServiceImpl;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,8 @@ import java.util.function.Consumer;
 public class AdminParkingService {
     @Autowired
     private final RepoAdminParking repoAdminParking;
+    @Autowired
+    EmailServiceImpl emailServiceImpl;
 
     public AdminParkingService(RepoAdminParking repoAdminParking1){
         this.repoAdminParking= repoAdminParking1;
@@ -28,10 +32,22 @@ public class AdminParkingService {
 
     public String changeAccess(long idAdminParking){
         AdminParking adminParking = repoAdminParking.findByIdAdminParking(idAdminParking);
+        boolean estactive = adminParking.getAcces();
         if(adminParking == null)
             throw new NoContentException("invalid");
         adminParking.setAcces(!adminParking.getAcces());
         repoAdminParking.save(adminParking);
+        if(estactive == true){
+            String message = "Votre compte est désactiver , merci de nous contacter";
+            //Alert
+            EmailDetails details = new EmailDetails(adminParking.getEmail(), message, "Message de la part de EasyPark");
+            emailServiceImpl.sendSimpleMail(details);
+        }else {
+            String message = "Votre compte est activer , merci de vous connecter avec votre compte";
+            //Alert
+            EmailDetails details = new EmailDetails(adminParking.getEmail(), message, "Message de la part de EasyPark");
+            emailServiceImpl.sendSimpleMail(details);
+        }
         return "succes";
     }
     //
@@ -40,6 +56,10 @@ public class AdminParkingService {
                 savePhoto(agrementParking, adminParking::setAgrementParking);
 
                  adminParking.setAcces(false);
+                // Envoi d'un e-mail pour informer de la création de l'administrateur
+                String message = "Votre compte a été créé avec succès, vous aurez un message de confimation dans quelques instants";
+                EmailDetails details = new EmailDetails(adminParking.getEmail(), message, "Message de la part de EasyPark");
+                emailServiceImpl.sendSimpleMail(details);
                 return repoAdminParking.save(adminParking);
             } catch (Exception e) {
                 throw new EntityNotFoundException("Erreur lors de l'enregistrement de l'admin", e);
