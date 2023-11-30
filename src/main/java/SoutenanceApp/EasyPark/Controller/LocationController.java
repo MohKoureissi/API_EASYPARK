@@ -2,6 +2,7 @@ package SoutenanceApp.EasyPark.Controller;
 
 import SoutenanceApp.EasyPark.Modele.Location;
 import SoutenanceApp.EasyPark.Modele.Paiement;
+import SoutenanceApp.EasyPark.Modele.Voiture;
 import SoutenanceApp.EasyPark.Service.LocationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -49,6 +50,11 @@ public class LocationController {
     @Operation(summary = "Lire une location par son id")
     public ResponseEntity<Location> getById(@Valid @PathVariable long idLocation){
         return new ResponseEntity<>(locationService.getLocationById(idLocation), HttpStatus.OK);
+    }
+     @GetMapping("list/{idAdminParking}")
+    @Operation(summary = "Affichage de la liste deslocations enregistrer par l'AdminParking")
+    public ResponseEntity<List<Location>> ListVoiture(@PathVariable long idAdminParking){
+        return new ResponseEntity<>(locationService.ListParAdminParking(idAdminParking), HttpStatus.OK);
     }
 
     @PutMapping("/update")

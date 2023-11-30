@@ -2,6 +2,7 @@ package SoutenanceApp.EasyPark.Controller;
 
 import SoutenanceApp.EasyPark.Modele.AdminParking;
 import SoutenanceApp.EasyPark.Modele.Voiture;
+import SoutenanceApp.EasyPark.Repositories.VoitureRepository;
 import SoutenanceApp.EasyPark.Service.VoitureService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.json.JsonMapper;
@@ -29,6 +30,8 @@ public class VoitureController {
     @Autowired
     private final VoitureService voitureService;
 
+    @Autowired
+    private VoitureRepository voitureRepository; 
 
     @PostMapping("/create")
     @Operation(summary = "Ajouter nouvelle Voiture")
@@ -58,8 +61,14 @@ public class VoitureController {
         return new ResponseEntity<>(voitureService.getAllVoiture(), HttpStatus.OK);
     }
 
+    @GetMapping("list/{idAdminParking}")
+    @Operation(summary = "Affichage de la liste des voitures a travers l'idAdminParking")
+    public ResponseEntity<List<Voiture>> ListVoiture(@PathVariable long idAdminParking){
+        return new ResponseEntity<>(voitureService.ListParAdminParking(idAdminParking), HttpStatus.OK);
+    }
+
     @GetMapping("/read/{idVoiture}")
-    @Operation(summary = "Lire voiture par id")
+    @Operation(summary = "Lire voiture par id ")
     public ResponseEntity<Voiture> getVoitureById(@Valid @PathVariable long idVoiture){
         return new ResponseEntity<>(voitureService.getVoitureById(idVoiture), HttpStatus.OK);
     }

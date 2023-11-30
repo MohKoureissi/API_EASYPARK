@@ -2,6 +2,7 @@ package SoutenanceApp.EasyPark.Service;
 
 import SoutenanceApp.EasyPark.Exception.NoContentException;
 import SoutenanceApp.EasyPark.Modele.Location;
+import SoutenanceApp.EasyPark.Modele.Voiture;
 import SoutenanceApp.EasyPark.Repositories.LocationRepository;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
@@ -24,6 +25,15 @@ public class LocationService {
         if(location1 != null)
             throw new EntityNotFoundException("Cette location existe déja");
         return locationRepository.save(location);
+    }
+
+    //Liste des voitures ajouter par l'adminParking
+    public List<Location> ListParAdminParking(long idAdminParking){
+        if(!locationRepository.findByAdminParkingIdAdminParking(idAdminParking).isEmpty()){
+            return locationRepository.findByAdminParkingIdAdminParking(idAdminParking);
+        } else{
+            throw new NoContentException("Aucune voiture ajouter par cet AdminParking");
+        }
     }
 
     public List<Location> getAllLocation(){

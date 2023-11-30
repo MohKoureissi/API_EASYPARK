@@ -2,6 +2,7 @@ package SoutenanceApp.EasyPark.Service;
 
 import SoutenanceApp.EasyPark.Exception.NoContentException;
 import SoutenanceApp.EasyPark.Modele.Maintenance;
+import SoutenanceApp.EasyPark.Modele.Voiture;
 import SoutenanceApp.EasyPark.Repositories.MaintenanceRepositoy;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
@@ -31,6 +32,14 @@ public class MaintenanceService {
         if(maintenances.isEmpty())
             throw new NoContentException("Aucune maintenance trouver");
         return maintenances;
+    }
+    //Liste des Maintenances effectuer par l'adminParking
+    public List<Maintenance> ListParAdminParking(long idAdminParking){
+        if(!maintenanceRepositoy.findByAdminParkingIdAdminParking(idAdminParking).isEmpty()){
+            return maintenanceRepositoy.findByAdminParkingIdAdminParking(idAdminParking);
+        } else{
+            throw new NoContentException("Aucune maintenance effectuer par cet AdminParking");
+        }
     }
 
     public Maintenance getById(long idMaintenance){

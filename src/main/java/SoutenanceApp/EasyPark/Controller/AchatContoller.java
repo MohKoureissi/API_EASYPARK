@@ -2,6 +2,7 @@ package SoutenanceApp.EasyPark.Controller;
 
 import SoutenanceApp.EasyPark.Modele.Achat;
 import SoutenanceApp.EasyPark.Modele.SuperAdmin;
+import SoutenanceApp.EasyPark.Modele.Voiture;
 import SoutenanceApp.EasyPark.Service.AchatService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -49,6 +50,12 @@ public class AchatContoller {
     @Operation(summary = "Lire achat par son id")
     public ResponseEntity<Achat> getById(@Valid @PathVariable long idAchat){
         return new ResponseEntity<>(achatService.getAchatById(idAchat), HttpStatus.OK);
+    }
+
+     @GetMapping("list/{idAdminParking}")
+    @Operation(summary = "Affichage de la liste des ventes enregistrer par l'AdminParking")
+    public ResponseEntity<List<Achat>> ListVoiture(@PathVariable long idAdminParking){
+        return new ResponseEntity<>(achatService.ListParAdminParking(idAdminParking), HttpStatus.OK);
     }
 
     @PutMapping("/update")

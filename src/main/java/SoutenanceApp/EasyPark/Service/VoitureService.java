@@ -69,6 +69,16 @@ public class VoitureService {
             throw new NoContentException("Aucune voiture trouvé");
         return voiture1;
     }
+   
+
+    //Liste des voitures ajouter par l'adminParking
+    public List<Voiture> ListParAdminParking(long idAdminParking){
+        if(!voitureRepository.findByAdminParkingIdAdminParking(idAdminParking).isEmpty()){
+            return voitureRepository.findByAdminParkingIdAdminParking(idAdminParking);
+        } else{
+            throw new NoContentException("Aucune voiture ajouter par cet AdminParking");
+        }
+    }
 
     //Lister une voiture spécifique
     public Voiture getVoitureById(long idVoiture){

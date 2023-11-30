@@ -2,6 +2,7 @@ package SoutenanceApp.EasyPark.Controller;
 
 import SoutenanceApp.EasyPark.Modele.Achat;
 import SoutenanceApp.EasyPark.Modele.Maintenance;
+import SoutenanceApp.EasyPark.Modele.Voiture;
 import SoutenanceApp.EasyPark.Service.MaintenanceService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -49,6 +50,11 @@ public class MaintenanceController {
     @Operation(summary = "Lire une Maintenance par son ID")
     public ResponseEntity<Maintenance> getById(@Valid @PathVariable long idMaintenance){
         return new ResponseEntity<>(maintenanceService.getById(idMaintenance), HttpStatus.OK);
+    }
+     @GetMapping("list/{idAdminParking}")
+    @Operation(summary = "Affichage de la liste des maintenances effectuer par l'AdminParking")
+    public ResponseEntity<List<Maintenance>> ListVoiture(@PathVariable long idAdminParking){
+        return new ResponseEntity<>(maintenanceService.ListParAdminParking(idAdminParking), HttpStatus.OK);
     }
 
     @PutMapping("/update")
