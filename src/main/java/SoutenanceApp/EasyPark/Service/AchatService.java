@@ -50,13 +50,13 @@ public class AchatService {
     }
 
     //Liste des Achat effectuer dans le parking de l'adminParking
-    public List<Achat> ListParAdminParking(long idAdminParking){
-        if(!achatRepository.findByAdminParkingIdAdminParking(idAdminParking).isEmpty()){
-            return achatRepository.findByAdminParkingIdAdminParking(idAdminParking);
-        } else{
-            throw new NoContentException("Aucun achat effectuer dans cet Parking");
-        }
-    }
+    // public List<Achat> ListParAdminParking(long idAdminParking){
+    //     if(!achatRepository.findByAdminParkingIdAdminParking(idAdminParking).isEmpty()){
+    //         return achatRepository.findByAdminParkingIdAdminParking(idAdminParking);
+    //     } else{
+    //         throw new NoContentException("Aucun achat effectuer dans cet Parking");
+    //     }
+    // }
 
     public Achat getAchatById(long idAchat){
         Achat achat = achatRepository.findByIdAchat(idAchat);

@@ -5,7 +5,8 @@ import SoutenanceApp.EasyPark.Modele.Achat;
 import SoutenanceApp.EasyPark.Modele.Voiture;
 import SoutenanceApp.EasyPark.Repositories.VoitureRepository;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.function.Consumer;
+
 
 @Service
 public class VoitureService {

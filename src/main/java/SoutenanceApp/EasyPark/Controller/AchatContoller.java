@@ -52,11 +52,12 @@ public class AchatContoller {
         return new ResponseEntity<>(achatService.getAchatById(idAchat), HttpStatus.OK);
     }
 
-     @GetMapping("list/{idAdminParking}")
-    @Operation(summary = "Affichage de la liste des ventes enregistrer par l'AdminParking")
-    public ResponseEntity<List<Achat>> ListVoiture(@PathVariable long idAdminParking){
-        return new ResponseEntity<>(achatService.ListParAdminParking(idAdminParking), HttpStatus.OK);
-    }
+    //Avec l'id de la voiture on a deja la liste des ventes enregistrer par l'admin 
+    //  @GetMapping("list/{idAdminParking}")
+    // @Operation(summary = "Affichage de la liste des ventes enregistrer par l'AdminParking")
+    // public ResponseEntity<List<Achat>> ListVoiture(@PathVariable long idAdminParking){
+    //     return new ResponseEntity<>(achatService.ListParAdminParking(idAdminParking), HttpStatus.OK);
+    // }
 
     @PutMapping("/update")
     @Operation(summary = "Modification d'un Achat")

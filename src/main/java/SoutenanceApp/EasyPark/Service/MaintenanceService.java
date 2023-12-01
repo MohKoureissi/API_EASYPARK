@@ -34,13 +34,13 @@ public class MaintenanceService {
         return maintenances;
     }
     //Liste des Maintenances effectuer par l'adminParking
-    public List<Maintenance> ListParAdminParking(long idAdminParking){
-        if(!maintenanceRepositoy.findByAdminParkingIdAdminParking(idAdminParking).isEmpty()){
-            return maintenanceRepositoy.findByAdminParkingIdAdminParking(idAdminParking);
-        } else{
-            throw new NoContentException("Aucune maintenance effectuer par cet AdminParking");
-        }
-    }
+    // public List<Maintenance> ListParAdminParking(long idAdminParking){
+    //     if(!maintenanceRepositoy.findByAdminParkingIdAdminParking(idAdminParking).isEmpty()){
+    //         return maintenanceRepositoy.findByAdminParkingIdAdminParking(idAdminParking);
+    //     } else{
+    //         throw new NoContentException("Aucune maintenance effectuer par cet AdminParking");
+    //     }
+    // }
 
     public Maintenance getById(long idMaintenance){
         Maintenance maintenance= maintenanceRepositoy.findByIdMaintenance(idMaintenance);

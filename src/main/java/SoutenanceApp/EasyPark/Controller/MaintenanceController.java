@@ -51,11 +51,12 @@ public class MaintenanceController {
     public ResponseEntity<Maintenance> getById(@Valid @PathVariable long idMaintenance){
         return new ResponseEntity<>(maintenanceService.getById(idMaintenance), HttpStatus.OK);
     }
-     @GetMapping("list/{idAdminParking}")
-    @Operation(summary = "Affichage de la liste des maintenances effectuer par l'AdminParking")
-    public ResponseEntity<List<Maintenance>> ListVoiture(@PathVariable long idAdminParking){
-        return new ResponseEntity<>(maintenanceService.ListParAdminParking(idAdminParking), HttpStatus.OK);
-    }
+
+    //  @GetMapping("list/{idAdminParking}")
+    // @Operation(summary = "Affichage de la liste des maintenances effectuer par l'AdminParking")
+    // public ResponseEntity<List<Maintenance>> ListVoiture(@PathVariable long idAdminParking){
+    //     return new ResponseEntity<>(maintenanceService.ListParAdminParking(idAdminParking), HttpStatus.OK);
+    // }
 
     @PutMapping("/update")
     @Operation(summary = "Modification d'une maintenance")

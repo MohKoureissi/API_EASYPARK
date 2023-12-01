@@ -28,13 +28,13 @@ public class LocationService {
     }
 
     //Liste des voitures ajouter par l'adminParking
-    public List<Location> ListParAdminParking(long idAdminParking){
-        if(!locationRepository.findByAdminParkingIdAdminParking(idAdminParking).isEmpty()){
-            return locationRepository.findByAdminParkingIdAdminParking(idAdminParking);
-        } else{
-            throw new NoContentException("Aucune voiture ajouter par cet AdminParking");
-        }
-    }
+    // public List<Location> ListParAdminParking(long idAdminParking){
+    //     if(!locationRepository.findByAdminParkingIdAdminParking(idAdminParking).isEmpty()){
+    //         return locationRepository.findByAdminParkingIdAdminParking(idAdminParking);
+    //     } else{
+    //         throw new NoContentException("Aucune voiture ajouter par cet AdminParking");
+    //     }
+    // }
 
     public List<Location> getAllLocation(){
         List<Location> locations= locationRepository.findAll();

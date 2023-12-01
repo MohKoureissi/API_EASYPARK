@@ -51,11 +51,11 @@ public class LocationController {
     public ResponseEntity<Location> getById(@Valid @PathVariable long idLocation){
         return new ResponseEntity<>(locationService.getLocationById(idLocation), HttpStatus.OK);
     }
-     @GetMapping("list/{idAdminParking}")
-    @Operation(summary = "Affichage de la liste deslocations enregistrer par l'AdminParking")
-    public ResponseEntity<List<Location>> ListVoiture(@PathVariable long idAdminParking){
-        return new ResponseEntity<>(locationService.ListParAdminParking(idAdminParking), HttpStatus.OK);
-    }
+    //  @GetMapping("list/{idAdminParking}")
+    // @Operation(summary = "Affichage de la liste deslocations enregistrer par l'AdminParking")
+    // public ResponseEntity<List<Location>> ListVoiture(@PathVariable long idAdminParking){
+    //     return new ResponseEntity<>(locationService.ListParAdminParking(idAdminParking), HttpStatus.OK);
+    // }
 
     @PutMapping("/update")
     @Operation(summary = "Modification d'une Location")
