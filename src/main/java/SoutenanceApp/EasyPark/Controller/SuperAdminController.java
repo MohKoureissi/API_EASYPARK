@@ -1,5 +1,6 @@
 package SoutenanceApp.EasyPark.Controller;
 
+import SoutenanceApp.EasyPark.Modele.AdminParking;
 import SoutenanceApp.EasyPark.Modele.Paiement;
 import SoutenanceApp.EasyPark.Modele.SuperAdmin;
 import SoutenanceApp.EasyPark.Repositories.SuperAdminRepository;
@@ -52,5 +53,12 @@ public class SuperAdminController {
     @Operation(summary = "Modification du SuperAdmin")
     public ResponseEntity<SuperAdmin> update(@Valid @RequestBody SuperAdmin superAdmin){
         return new ResponseEntity<>(superAdminService.update(superAdmin), HttpStatus.OK);
+    }
+
+     @GetMapping("/login")
+    @Operation(summary = "Connexion d'un SuperAdmin ")
+    public SuperAdmin connexion(@RequestParam("email")  String email,
+                            @RequestParam("motdepasse")  String motdepasse) {
+        return superAdminService.connexion(email, motdepasse);
     }
 }
